@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function ClientList({ ...clients }) {
 
+
   const [isVisible, setIsVisible] = useState(Array(clients.clients.length).fill(false));
 
   const screenWidth = window.innerWidth;

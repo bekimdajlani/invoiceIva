@@ -31,9 +31,77 @@ app.post('/api/items',async (req, res) => {
   }
 });
 
+app.put('/api/items/:id', async (req, res) => {
+  const itemId = req.params.id;
+  console.log(req.body);
+  try {
+    const response = await axios.put(`http://sad1.ivaelektronik.com:8081/api/Items/${itemId}`, req.body, apiConfig);
+
+    const responseData = response.data;
+    res.json(responseData);
+  } catch (error) {
+    console.error("Error occurred while forwarding request:", error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.delete('/api/items/:id', async (req, res) => {
+  const itemId = req.params.id;
+  try {
+    const response = await axios.delete(`http://sad1.ivaelektronik.com:8081/api/Items/${itemId}`);
+    const responseData = response.data;
+    res.json(responseData);
+  } catch (error) {
+    console.error("Error occurred while forwarding request:", error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.delete('/api/customers/:id', async (req, res) => {
+  const clientId = req.params.id;
+  try {
+    const response = await axios.delete(`http://sad1.ivaelektronik.com:8081/api/Customers/${clientId}`);
+    const responseData = response.data;
+    res.json(responseData);
+  } catch (error) {
+    console.error("Error occurred while forwarding request:", error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.delete('/api/invoices/:id', async (req, res) => {
+  const invoiceId = req.params.id;
+  try {
+    const response = await axios.delete(`http://sad1.ivaelektronik.com:8081/api/Invoices/${invoiceId}`);
+    const responseData = response.data;
+    res.json(responseData);
+  } catch (error) {
+    console.error("Error occurred while forwarding request:", error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
   app.post('/api/customers', async (req, res) => {
     try {
       const response = await axios.post('http://sad1.ivaelektronik.com:8081/api/Customers', req.body, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      const responseData = response.data;
+      res.json(responseData);
+    } catch (error) {
+      console.error("Error occurred while forwarding request:", error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+  app.put('/api/customers/:id', async (req, res) => {
+    const clientId = req.params.id;
+    try {
+      const response = await axios.put(`http://sad1.ivaelektronik.com:8081/api/Customers/${clientId}`, req.body, {
         headers: {
           'Content-Type': 'application/json'
         },

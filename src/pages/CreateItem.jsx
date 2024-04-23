@@ -8,70 +8,6 @@ const labelStyle =
 const pStyle = "flex flex-col m-2";
 
 export default function CreateItem() {
-  // const [item,setItem] = useState(
-  //   {
-  //     name: '',
-  //     code: '',
-  //     price: 0,
-  //     description: '',
-  //     itemType: 0,
-  //     vatRate: 0,
-  //     weight: 0,
-  //     length: 0,
-  //     width: 0,
-  //     height: 0,
-  //     sku: "",
-  //     barcode: "",
-  //     manufacturer: "",
-  //     brand: "",
-  //     model: "",
-  //     color: "",
-  //     size: "",
-  //     material: "",
-  //     countryOfOrigin: "",
-  //     warranty: "",
-  //     supplier: "",
-  //     uom: "",
-  //   }
-  // )
-  // const handleItemFields = (e) => {
-  //   const { name, value } = e.target;
-    
-  //   // Convert to integer for specific fields
-  //   const parsedValue =
-  //     name === 'vatRate' ||
-  //     name === 'weight' ||
-  //     name === 'length' ||
-  //     name === 'price' ||
-  //     name === 'width' ||
-  //     name === 'itemType'||
-  //     name === 'height'
-  //       ? parseFloat(value) // Assuming these fields are floating-point numbers, not integers
-  //       : value;
-  
-
-  
-  //   setItem(parsedValue);
-  // };
-
-  // async function handleSubmit (e) {
-  //   e.preventDefault();
-  //   try {
-  //       const apiUrl = 'http://localhost:3000/api/items';
-  //       const response = await axios.post( apiUrl, item , 
-  //               {
-  //                 headers: {
-  //                   "Content-Type": "application/json",
-  //                 },
-  //               }
-  //             )
-  //             console.log(response.data);
-  //           } catch (error) {
-  //             console.error("Error occurred while submitting form:", error);
-  //           }
-  //           console.log(item);
-  //           redirect("/items");
-  // }
   return (
     <Form method="post" className="m-0 w-auto">
       <h1 className="font-bold text-blue-950 text-4xl">Add Item</h1>
@@ -280,6 +216,5 @@ const response = await axios.post( apiUrl, item ,
   } catch (error) {
     console.error("Error occurred while submitting form:", error);
   }
-
   return null;
 }

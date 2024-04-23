@@ -7,7 +7,7 @@ export default function ItemsList(props) {
       <ul className="font-bold">
         {items.map(
           (item) =>
-            item.isActive && (
+            !item.isDeleted && (
               <Link to={`${item.id}`}
                 key={item.id}
                 className="grid grid-cols-3 border border-2 p-4 hover:bg-zinc-200"

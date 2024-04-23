@@ -9,20 +9,20 @@ export default function InvoiceForm(props) {
   const [invoiceLines, setInvoiceLines] = useState([
     { id: 1, line: <InvoiceLines onChangeVat={handleTotalVat} onChangeTotWoVat={handleTotalWoVat} onChangeTotal={handleTotalWvat}  items={items} /> },
   ]);
-  const [totalWoVat, setTotalWoVat] = useState(0);
-  const [totalVat, setTotalVat] = useState(0);
-  const [totalWvat, setTotalWvat] = useState(0);
-
+  const [totalWoVat,setTotalWoVat] = useState(0);
+  const [totalVat,setTotalVat] = useState(0);
+  const [totalWvat,setTotalWvat] = useState(0);
+  
   function handleTotalWoVat(totalAmount) {
     setTotalWoVat((prevState) => prevState + totalAmount);
   }
-
+  
   function handleTotalVat(vatAmount) {
     setTotalVat((prevState) => prevState + vatAmount);
   }
-
-  function handleTotalWvat(totalInvoice) {
-    setTotalWvat((prevState) => prevState + totalInvoice);
+  
+  function handleTotalWvat() {
+    setTotalWvat(totalWoVat + totalVat);
   }
 
   function addNewLine() {
@@ -32,6 +32,11 @@ export default function InvoiceForm(props) {
       line: <InvoiceLines onChangeVat={handleTotalVat} onChangeTotWoVat={handleTotalWoVat} onChangeTotal={handleTotalWvat} items={items} />,
     };
     setInvoiceLines([...invoiceLines, newLine]);
+  }
+
+
+  function newLineOnClick () {
+    addNewLine();
   }
 
   const lineInputStyle =
@@ -94,13 +99,13 @@ export default function InvoiceForm(props) {
   }
 
   return (
-    <Form method="POST" className="font-bold w-auto">
+    <Form method="POST" className="font-bold w-auto mt-1">
       {/* head */}
-      <div className="grid grid-cols-2 p-3 bg-lime-900 text-white">
+      <div className="grid grid-cols-2 p-3 bg-blue-950 text-white">
         <p className="mb-2">
           <label htmlFor="invoiceNumber">Number: </label>
           <input
-            className="appearance-none border-b-2 bg-lime-900"
+            className="appearance-none border-b-2 bg-blue-950"
             id="invoiceNumber"
             type="number"
             name="invoiceNumber"
@@ -114,13 +119,13 @@ export default function InvoiceForm(props) {
             type="date"
             name="invoiceDate"
             defaultValue={date}
-            className="appearance-none border-b-2 bg-lime-900"
+            className="appearance-none border-b-2 bg-blue-950"
           />
         </p>
         <div>
           <label htmlFor="client">Client: </label>
           <input
-            className="appearance-none border-b-2 bg-lime-900"
+            className="appearance-none border-b-2 bg-blue-950"
             type="text"
             id="client"
             name="client"
@@ -144,7 +149,7 @@ export default function InvoiceForm(props) {
           )}
         </div>
         <p>
-          <label htmlFor="isPaid">Pay? </label>
+          <label htmlFor="isPaid">Pay?</label>
           <input
             type="checkbox"
             id="isPaid"
@@ -178,7 +183,7 @@ export default function InvoiceForm(props) {
         <button
           type="button"
           className="bg-green-900 text-white rounded-2xl text-center"
-          onClick={addNewLine}
+          onClick={newLineOnClick}
         >
           New Line
         </button>
@@ -207,10 +212,10 @@ export default function InvoiceForm(props) {
               type="number"
               name="totalWOvat"
               value={totalWoVat}
-              onChange={handleTotalWoVat}
+              readOnly
             />
           </p>
-          <p>
+          <p className="flex flex-col">
             <label htmlFor="totVat">VAT</label>
             <input
               className={lineInputStyle}
@@ -218,10 +223,10 @@ export default function InvoiceForm(props) {
               type="number"
               name="totalVat"
               value={totalVat}
-              onChange={handleTotalVat}
+              readOnly
             />
           </p>
-          <p>
+          <p className="flex flex-col">
             <label htmlFor="tot">Total</label>
             <input
               className={lineInputStyle}
@@ -229,7 +234,7 @@ export default function InvoiceForm(props) {
               type="number"
               name="total"
               value={totalWvat}
-              onChange={handleTotalWvat}
+              readOnly
             />
           </p>
         </div>

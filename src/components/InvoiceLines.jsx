@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function InvoiceLines(props) {
-  console.log(props);
   const lineInputStyle =
     "appearance-none border-b border-gray-300 max-w-24 rounded-md p-1 focus:outline-none focus:border-blue-500";
   const items = props.items;
@@ -31,21 +30,6 @@ export default function InvoiceLines(props) {
 
   function handleItemId (itemId) {
     setItemId(itemId);
-  }
-
-  function handleTotal (e) {
-    const total = parseFloat(e.target.value);
-    props.onChangeTotWoVat(total)
-  }
-
-  function handleVat(e){
-    const vat = parseFloat(e.target.value);
-    props.onChangeVat(vat);
-  }
-
-  function handleTotalwVat (e) {
-    const totalW = parseFloat(e.target.value);
-    props.onChangeTotal(totalW)
   }
 
   function handleSuggestionClick(suggestion) {
@@ -93,6 +77,14 @@ export default function InvoiceLines(props) {
   function changePrice (event) {
     setPrice(event.target.value)
   }
+
+  useEffect(() => {
+    props.onChangeTotWoVat(amount);
+  },[amount]);
+
+  useEffect(()=>{
+    props.onChangeVat(vat);
+  },[vat]);
 
   useEffect(() => {
     calcAmount(qty, price, discountPercent)
@@ -172,7 +164,7 @@ export default function InvoiceLines(props) {
           type="number"
           name="amount"
           value={amount}
-          onChange={handleTotal}
+          readOnly
         />
       </p>
       <p>
@@ -182,7 +174,7 @@ export default function InvoiceLines(props) {
           type="number"
           name="vatRate"
           value={vat}
-          onChange={handleVat}
+          readOnly
         />
       </p>
       <p>
@@ -192,7 +184,7 @@ export default function InvoiceLines(props) {
           name="totalAmount"
           value={total}
           className={lineInputStyle}
-          onChange={handleTotalwVat}
+          readOnly
         />
       </p>
     </div>

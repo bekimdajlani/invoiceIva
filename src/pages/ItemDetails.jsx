@@ -13,7 +13,6 @@ export default function ItemDetails() {
       <Suspense fallback={<p className="animate-pulse">Loading Item...</p>}>
         <Await resolve={data}>
           {(loadedData) => {
-            console.log(loadedData)
             return <Item data={loadedData}/>
           }}
         </Await>

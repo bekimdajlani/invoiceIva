@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default function Invoice (props) {
 
     const invoice = props.data.invoice;
@@ -14,6 +16,17 @@ export default function Invoice (props) {
       };
 
       const clientName = (clientId) => clients.find((client) => client.id === clientId)?.name || null;
+      async function handleDeleteInvoice () {
+        try {
+          const id = invoice.id;
+          const apiUrl = `http://localhost:8081/api/customers/${id}`;
+          const response = await axios.delete(apiUrl);
+          redirect('/customers');
+            console.log(response.data);
+          } catch (error) {
+            console.error("Error occurred while submitting form:", error);
+          }
+      }
     
     return (
         <form>

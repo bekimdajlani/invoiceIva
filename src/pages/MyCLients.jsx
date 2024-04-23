@@ -30,7 +30,6 @@ async function loadClients() {
   }
 }
 
-  
 export function loader() {
   return defer({
     clients: loadClients(),
